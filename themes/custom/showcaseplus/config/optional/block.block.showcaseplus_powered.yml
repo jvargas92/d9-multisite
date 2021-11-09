@@ -1,0 +1,22 @@
+uuid: 33ed8c77-80cb-42ae-8fc3-37a6c23d7a75
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - showcaseplus
+_core:
+  default_config_hash: jQQUUWN2Uxr5qZtc9zcJKBCxpKY8orN1u2HPqYYRQDI
+id: showcaseplus_powered
+theme: showcaseplus
+region: sub_footer_first
+weight: -6
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }

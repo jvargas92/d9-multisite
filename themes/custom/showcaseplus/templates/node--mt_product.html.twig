@@ -1,0 +1,84 @@
+{#
+/**
+ * @file
+ * Showcase+'s theme implementation to display a Product node.
+ */
+#}
+
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'clearfix',
+  ]
+%}
+{{ attach_library('classy/node') }}
+{{ attach_library('showcaseplus/node') }}
+<article{{ attributes.addClass(classes) }}>
+  <div class="node__container">
+    <div class="row">
+      {% block node_side_first %}
+        {% if content.field_image|render %}
+          <div class="col-md-4">
+            <div class="node__side-content clearfix">
+              {{ content.field_image }}
+            </div>
+          </div>
+        {% endif %}
+      {% endblock %}
+      {% block content %}
+        {{ attach_library('showcaseplus/node-product') }}
+        <div class="{% 
+          if (content.field_image|render and content.field_mt_content_sidebar|render) %}
+            col-md-6
+          {% elseif (not content.field_image|render and content.field_mt_content_sidebar|render) %}
+            col-md-10
+          {% elseif ( content.field_image|render and not content.field_mt_content_sidebar|render) %}
+            col-md-8
+          {% else %}
+            col-md-12
+          {% endif %}">
+          <div{{ content_attributes.addClass('node__main-content', 'clearfix') }}>
+            <header class="node__header">
+              {{ title_prefix }}
+              {% if not page %}
+                <h2{{ title_attributes.addClass('node__title') }}>
+                  <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+                </h2>
+              {% else %}
+                <h1{{ title_attributes.addClass('node__title') }}>{{ label }}</h1>
+              {% endif %}
+              {{ title_suffix }}
+              {% if display_submitted %}
+                <div class="node__meta">
+                  {{ author_picture }}
+                  <span{{ author_attributes.addClass('node__submitted-info') }}>
+                    {% trans %}By {{ author_name }} on {{ date }}{% endtrans %}
+                  </span>
+                  {{ metadata }}
+                </div>
+              {% endif %}
+            </header>
+            {{ content|without('comment', 'field_image', 'field_mt_content_tabs', 'field_mt_content_sidebar', 'links') }}
+          </div>
+        </div>
+      {% endblock %}
+      {% block node_side_second %}
+        {% if content.field_mt_content_sidebar|render %}
+          <div class="col-md-2">
+            <div class="node__side-content clearfix">
+              {{ content.field_mt_content_sidebar }}
+            </div>
+          </div>
+        {% endif %}
+      {% endblock %}
+    </div>
+    {{ content.field_mt_content_tabs }}
+    {{ content.links }}
+    {{ content.comment }}
+  </div>
+</article>

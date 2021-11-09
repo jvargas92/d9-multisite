@@ -1,0 +1,13 @@
+name: BUEditor
+type: module
+description: Provides a customizable text editor.
+package: Content authoring
+core_version_requirement: ^8.8 || ^9
+dependencies:
+  - drupal:editor
+configure: bueditor.admin
+
+# Information added by Drupal.org packaging script on 2020-09-06
+version: '8.x-2.1'
+project: 'bueditor'
+datestamp: 1599354889

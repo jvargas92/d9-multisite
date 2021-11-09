@@ -1,0 +1,17 @@
+# The uri key should map to the proxy domain names
+# being setup in the .lando.yml file.
+parasiempre:
+ root: /app
+ uri: http://parasiempre.lndo.site
+vendimialma:
+ root: /app
+ uri: http://vendimialma.lndo.site
+alasdoradas:
+ root: /app
+ uri: http://alasdoradas.lndo.site
+techvalet:
+ root: /app
+ uri: http://techvalet.lndo.site
+hermanopac:
+ root: /app
+ uri: http://hermanopac.lndo.site

@@ -1,0 +1,52 @@
+{% extends "node.html.twig" %}
+{#
+/**
+ * @file
+ * Showcase+'s theme implementation to display a Team member node.
+ */
+#}
+
+{% block content %}
+  {{ attach_library('showcaseplus/node-team-member') }}
+  {{ content|without('field_mt_member_photo','field_mt_subtitle','field_mt_facebook_account','field_mt_twitter_account','field_mt_linkedin_account','body','comment') }}
+  <div class="row content">
+    {% if content.field_mt_member_photo|render %}
+      {{ attach_library('showcaseplus/magnific-popup-field-member-photo-init') }}
+      <div class="col-md-5 col-sm-6">
+        <div class="photo-container">
+          {{ content.field_mt_member_photo }}
+        </div>
+      </div>
+    {% endif %}
+    <div class="{{ (content.field_mt_member_photo|render) ? 'col-md-7 col-sm-6' : 'col-sm-12' }}">
+      {{ content.field_mt_subtitle }}
+      {{ content.body }}
+      {% if content.field_mt_facebook_account|render or content.field_mt_twitter_account|render or content.field_mt_linkedin_account|render %}
+        <ul class="icons-list">
+          {% if content.field_mt_facebook_account|render %}
+            <li>
+              <a target="_blank" href="{{ node.field_mt_facebook_account.value }}">
+                <i class="fa fa-facebook"><span class="sr-only">facebook</span></i>
+              </a>
+            </li>
+          {% endif %}
+          {% if content.field_mt_twitter_account|render %}
+            <li>
+              <a target="_blank" href="{{ node.field_mt_twitter_account.value }}">
+                <i class="fa fa-twitter"><span class="sr-only">twitter</span></i>
+              </a>
+            </li>
+          {% endif %}
+          {% if content.field_mt_linkedin_account|render %}
+            <li>
+              <a target="_blank" href="{{ node.field_mt_linkedin_account.value }}">
+                <i class="fa fa-linkedin"><span class="sr-only">linkedin</span></i>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+  {{ content.comment }}
+{% endblock %}
